@@ -1,10 +1,7 @@
 import { shipmentsService } from "../services/shipmentsService";
 import { showAlert } from '../../Alert/alertActions';
-import {
-  shipmentActionConstants,
-  nameSpace
-} from "../constants/shipments.constants";
-import { createRequestBody } from "../factories/shipments.factory";
+import types from "../constants/shipmentsConstants";
+import { reset } from "redux-form";
 
 export const getShipments = () => {
   return async dispatch => {
@@ -24,23 +21,24 @@ export const getShipments = () => {
     }
   };
 
-  const request = () => {
+  function request(){
     return {
-      type: shipmentActionConstants[`GET_${nameSpace}_REQUEST`]
+      type: types.GET_SHIPMENTS
     };
   }
-  const success = (response) => {
+  function success (response) {
     return {
-      type: shipmentActionConstants[`GET_${nameSpace}_SUCCESS`],
+      type: types.GET_SHIPMENTS_SUCCESS,
       response
     };
   }
-  const failure = (error) => {
+  function failure (error) {
     return {
-      type: shipmentActionConstants[`GET_${nameSpace}_FAILURE`],
+      type:types.GET_SHIPMENTS_FAILURE,
       error
     };
   }
+
 };
 
 export const viewShipment = id => {
@@ -63,19 +61,19 @@ export const viewShipment = id => {
 
   function request(request) {
     return {
-      type: shipmentActionConstants[`VIEW_${nameSpace}_REQUEST`],
+      type:types.GET_SHIPMENT,
       request
     };
   }
   function success(response) {
     return {
-      type: shipmentActionConstants[`VIEW_${nameSpace}_SUCCESS`],
+      type: types.GET_SHIPMENT_SUCCESS,
       response
     };
   }
   function failure(error) {
     return {
-      type: shipmentActionConstants[`VIEW_${nameSpace}_FAILURE`],
+      type: types.GET_SHIPMENT_FAILURE,
       error
     };
   }
@@ -103,19 +101,19 @@ export const deleteShipment = id => {
 
   function request(request) {
     return {
-      type: shipmentActionConstants[`DELETE_${nameSpace}_REQUEST`],
+      type: types.DELETE_SHIPMENT,
       request
     };
   }
   function success(response) {
     return {
-      type: shipmentActionConstants[`DELETE_${nameSpace}_SUCCESS`],
+      type: types.DELETE_SHIPMENT_SUCCESS,
       response
     };
   }
   function failure(error) {
     return {
-      type: shipmentActionConstants[`DELETE_${nameSpace}_FAILURE`],
+      type: types.DELETE_SHIPMENT_FAILURE,
       error
     };
   }
@@ -156,26 +154,44 @@ export const postShipments = (values, id) => {
   };
 
   function request(request) {
-    return { type: shipmentActionConstants[`POST_${nameSpace}_REQUEST`], request };
+    return { type: types.POST_SHIPMENT, request };
   }
   function success(response) {
     return {
-      type: shipmentActionConstants[`POST_${nameSpace}_SUCCESS`],
+      type: types.POST_SHIPMENT_SUCCESS,
       response
     };
   }
   function failure(error) {
     return {
-      type: shipmentActionConstants[`POST_${nameSpace}_FAILURE`],
+      type: types.POST_SHIPMENT_FAILURE,
       error
     };
   }
 };
 
 export const resetViewShipment = () => {
-  return { type: shipmentActionConstants[`VIEW_${nameSpace}_RESET`] };
+  return { type: types.VIEW_SHIPMENT_RESET };
 };
 
 export const resetPostShipment = () => {
-  return { type: shipmentActionConstants[`POST_${nameSpace}_RESET`] };
+  return { type: types.POST_SHIPMENT_RESET };
+};
+
+const createRequestBody = values => {
+  let requestObject = {
+    id: values.id,
+    name: values.name,
+    cargo: values.cargo,
+    mode: values.mode,
+    type: values.type,
+    destination: values.destination,
+    origin: values.origin,
+    services: values.services,
+    total: values.total,
+    status: values.status,
+    userId: values.userId
+  };
+
+  return requestObject;
 };

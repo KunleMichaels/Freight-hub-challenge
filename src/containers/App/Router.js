@@ -1,24 +1,48 @@
 import React, { Suspense, lazy } from "react";
 import { Route, Switch } from "react-router-dom";
-import Layout from "../Layout/index";
+import { connect } from 'react-redux';
+import Header from "../Layout/Header";
+import Sidebar from "../Layout/Sidebar";
 import Loading from "../../common/PreLoader";
+import Alert from '../Alert/Alert';
 
 const Dashboard = lazy(() => import("../Dashboard/Router"));
-// const Shipments = lazy(() => import("../Shipments/Router"));
+const Shipments = lazy(() => import("../Shipments/Router"));
 
-const Router = () => (
+const Router = ({ alert }) => (
   <Suspense fallback={<Loading />}>
     <Switch>
-        <main>
-          <div>
-            <Layout />
-            <div className="container__wrap">
-              <Route exact path="/" component={Dashboard} />
-            </div>
-          </div>
-        </main>
+        <section className='app'>
+            <Header />
+            <section className='app-body'>
+                <Sidebar />
+                {
+                            alert.visible ? (
+                                <section style={{ minWidth: '300px', margin: '10px', position: 'fixed', top: '50px', right: '10px', zIndex: '99999'}}>
+                                    <Alert
+                                        message={alert.message}
+                                        type={alert.type}
+                                        />
+                                </section>
+                              ) : null
+                        }
+                <main>
+                    <div className="main-content">
+                        <Route exact path="/" component={Dashboard} />
+                        <Route path="/shipments" component={Shipments} />
+                    </div>
+                </main>
+            </section>
+        </section>
     </Switch>
   </Suspense>
 );
 
-export default Router;
+const mapStateToProps = (state) => {
+    return {
+        alert: state.alert
+    }
+}
+
+
+export default connect(mapStateToProps)(Router); 

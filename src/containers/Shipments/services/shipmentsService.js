@@ -1,20 +1,20 @@
-import { apiCall } from "../../../utils/api.utils";
-import { SHIPMENTS_API } from "../../../constants/apiUrls";
+import { make } from "../../../api/requests";
+import { SHIPMENTS_API } from "../../../api/endpoints";
 
 export const shipmentsService = {
   getShipments,
-  postShipments,
+  postShipment,
   viewShipment,
   deleteShipment
 };
 
 function getShipments() {
-  return apiCall("GET", SHIPMENTS_API);
+  return make("GET", SHIPMENTS_API);
 }
 
-function postShipments(request, id) {
+function postShipment(request, id) {
   const method = id ? "PUT" : "POST";
-  return apiCall(
+  return make(
     method,
     id ? `${SHIPMENTS_API}/${id}` : SHIPMENTS_API,
     null,
@@ -23,9 +23,9 @@ function postShipments(request, id) {
 }
 
 function viewShipment(id) {
-  return apiCall("GET", `${SHIPMENTS_API}/${id}`);
+  return make("GET", `${SHIPMENTS_API}/${id}`);
 }
 
 function deleteShipment(id) {
-  return apiCall("DELETE", `${SHIPMENTS_API}/${id}`);
+  return make("DELETE", `${SHIPMENTS_API}/${id}`);
 }

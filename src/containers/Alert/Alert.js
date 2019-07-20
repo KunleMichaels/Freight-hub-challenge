@@ -9,8 +9,8 @@ const AlertWrapper = ({ message, type, hideAlert }) => (
 
 const mapStateToProps = (state) => {
     return {
-        message: state.notification.message,
-        type: state.notification.type
+        message: state.alert.message,
+        type: state.alert.type
     }
 }
 

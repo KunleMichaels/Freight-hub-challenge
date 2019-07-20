@@ -1,6 +1,6 @@
 
 /* SIDE BAR */
-.sidebar {
+/* .sidebar {
   height: 100vh;
   max-width: 200px;
   position: fixed;
@@ -68,7 +68,6 @@
   margin-left: 25px;
 }
 .sidebar:hover .logo-icon {
-  /* display: none; */
   opacity: 0.0;
   -webkit-transition: all 100ms ease-in-out;
   -moz-transition: all 100ms ease-in-out;
@@ -222,7 +221,7 @@ a:focus, a:hover {
 .menu-link>* {
   margin-left: 8px;
   margin-right: 8px;
-}
+} */
 
 
 .home__wrapper {
@@ -386,4 +385,8 @@ a.site-header__title{
 
 .ladda-button[data-color=lightblue] {
   background: #1092cc;
+}
+
+.asideIndex {
+  z-index: 1006 !important;
 }

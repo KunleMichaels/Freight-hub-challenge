@@ -3,7 +3,6 @@ import thunk from "redux-thunk";
 import {
   getShipments,
   viewShipment,
-  deleteShipment,
   postShipments,
   resetPostShipment,
   resetViewShipment

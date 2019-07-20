@@ -4,6 +4,8 @@ import { hot } from 'react-hot-loader';
 
 import Router from "./Router";
 import "../../styles/app.scss";
+import 'antd/dist/antd.css';
+import "bootstrap/dist/css/bootstrap.css";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
