@@ -91,8 +91,10 @@ describe("async actions", () => {
         type: "@@redux-form/RESET"
       },
       {
-        alertType: "success",
-        message: "Shipment saved successfully",
+        payload:{
+          alertType: "success",
+          message: "Shipment saved successfully"
+        },
         type: alertConstants.SHOW_ALERT
       },
       { type: types.GET_SHIPMENTS },
