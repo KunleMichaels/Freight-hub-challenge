@@ -1,0 +1,140 @@
+/* SIDE BAR */
+.sidebar {
+  height: 100vh;
+  max-width: 200px;
+  position: fixed;
+  background-color: #003553;
+  white-space: nowrap;
+  box-shadow: 0 0 5px rgba(0,0,0,.08);
+  display: flex;
+  flex-direction: column;
+  z-index: 997;
+  transform: translateZ(0);
+  transition: .3s ease;
+}
+.sidebar-folded .sidebar-icons-right {
+  left: -180px;
+}
+.sidebar-folded .sidebar-icons-right:hover {
+  left: 0;
+  box-shadow: 0 0 25px rgba(0,0,0,.1);
+}
+.menu-category, .sidebar, .sidebar-open {
+  overflow: hidden;
+}
+.aside, .quickview, .sidebar {
+  backface-visibility: hidden;
+  perspective: 1000;
+  will-change: transform;
+}
+.bg-white {
+  background-color: #fff!important;
+}
+.sidebar-header {
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+.sidebar-footer, .sidebar-header {
+  height: 55px;
+}
+
+.sidebar-header>* {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.sidebar-header a {
+  color: #fff;
+}
+
+.sidebar-header .logo-icon {
+  text-align: center;
+  flex-basis: 30px;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.sidebar-icons-boxed .sidebar-header .logo-icon {
+  flex-basis: 40px;
+}
+
+.sidebar-folded .sidebar:hover .logo, .sidebar-folded .sidebar:hover .title, .sidebar-folded .sidebar:hover.sidebar-icons-right.sidebar-icons-boxed .icon, .sidebar-folded .sidebar:hover.sidebar-icons-right.sidebar-icons-boxed .logo-icon {
+  margin-left: 8px;
+}
+.sidebar-folded .sidebar.sidebar-icons-right.sidebar-icons-boxed .dot, .sidebar-folded .sidebar.sidebar-icons-right.sidebar-icons-boxed .icon, .sidebar-folded .sidebar.sidebar-icons-right.sidebar-icons-boxed .logo-icon {
+  margin-left: 25px;
+}
+.sidebar:hover .logo-icon {
+  /* display: none; */
+  opacity: 0.0;
+  -webkit-transition: all 100ms ease-in-out;
+  -moz-transition: all 100ms ease-in-out;
+  -ms-transition: all 100ms ease-in-out;
+  -o-transition: all 100ms ease-in-out;
+  transition: all 100ms ease-in-out;
+}
+.sidebar-icons-right .sidebar-header .logo-icon, .sidebar-icons-right .sidebar-navigation .menu-link .dot, .sidebar-icons-right .sidebar-navigation .menu-link .icon {
+  order: 1;
+}
+
+.sidebar-folded .sidebar .logo, .sidebar-folded .sidebar .title {
+  transition: .4s;
+}
+
+.sidebar-header .logo {
+  font-size: 1rem;
+  font-weight: 500;
+  flex-grow: 1;
+}
+
+teaser img, img {
+  max-width: 100%;
+}
+
+.sidebar-navigation {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+}
+.fixed-table-container thead th, .ps-container {
+  position: relative;
+}
+.ps-container {
+  -ms-touch-action: auto;
+  touch-action: auto;
+  overflow: hidden!important;
+  -ms-overflow-style: none;
+}
+
+.menu {
+  margin-bottom: 30px;
+}
+.menu, ul.flexbox {
+  padding-left: 0;
+  list-style: none;
+}
+
+.menu-item {
+  transition: opacity .2s linear;
+}
+.menu-item, .note-btn-group.note-fontname, .note-btn-group.note-fontsize {
+  vertical-align: top;
+}
+.sidebar .menu>.menu-item:hover>.menu-link {
+  background-color: rgba(0,0,0,.1);
+}
+.sidebar .menu:not(.menu-bordery)>.menu-item.active>.menu-link {
+  background-color: #48b0f7;
+}
+.sidebar .menu-item.active>.menu-link, .sidebar .menu-item:hover>.menu-link, .sidebar .menu-link, .sidebar-profile, .sidebar-profile h3, .sidebar-profile h4, .sidebar-profile h5, .sidebar-profile h6 {
+  color: #fff;
+}
+.sidebar .menu-link {
+  position: relative;
+}
+a:focus, a:hover {
+  color: #616a78;
+  outline: 0;
+}
