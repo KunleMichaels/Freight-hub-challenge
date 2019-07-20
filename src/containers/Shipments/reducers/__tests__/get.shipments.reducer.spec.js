@@ -1,5 +1,5 @@
-import { shipments } from "../get.shipments.reducers";
-import { shipmentActionConstants } from "../../constants/shipments.constants";
+import { shipments } from "../getShipmentsReducers";
+import types from "../../constants/shipmentsConstants";
 
 const initialState = {
   loading: false,
@@ -17,15 +17,15 @@ describe("GET Shipments reducer", () => {
   it("should handle GET_SHIPMENTS_RESET", () => {
     expect(
       shipments(initialState, {
-        type: shipmentActionConstants.GET_SHIPMENTS_RESET
+        type: types.GET_SHIPMENTS_RESET
       })
     ).toEqual(initialState);
   });
 
-  it("should handle GET_SHIPMENTS_REQUEST", () => {
+  it("should handle GET_SHIPMENTS", () => {
     expect(
       shipments(initialState, {
-        type: shipmentActionConstants.GET_SHIPMENTS_REQUEST
+        type: types.GET_SHIPMENTS
       })
     ).toEqual({
       ...initialState,
@@ -36,7 +36,7 @@ describe("GET Shipments reducer", () => {
   it("should handle GET_SHIPMENTS_SUCCESS", () => {
     expect(
       shipments(initialState, {
-        type: shipmentActionConstants.GET_SHIPMENTS_SUCCESS,
+        type: types.GET_SHIPMENTS_SUCCESS,
         response: { data: [] }
       })
     ).toEqual({
@@ -51,7 +51,7 @@ describe("GET Shipments reducer", () => {
   it("should handle GET_SHIPMENTS_FAILURE", () => {
     expect(
       shipments(initialState, {
-        type: shipmentActionConstants.GET_SHIPMENTS_FAILURE,
+        type: types.GET_SHIPMENTS_FAILURE,
         error: { data: [] },
         loading: false,
         response: null,

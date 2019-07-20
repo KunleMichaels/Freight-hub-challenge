@@ -1,20 +1,82 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Typography, Row, Input, Divider, Col, Button } from 'antd';
+import { Typography, Row, Input, Icon, Divider, Col, Button } from 'antd';
 import { connect } from "react-redux";
 import { getShipments, deleteShipment } from "./actions/shipmentsActions";
 import Table from './components/ShipmentsTable';
+import Highlighter from 'react-highlight-words';
 import { MdModeEdit, MdPageview, MdDelete } from "react-icons/md";
 
 const { Title, Text } = Typography;
-const { Search } = Input;
 
 class Shipments extends React.Component {
-
+    state = {
+        searchText: ''
+    }
     componentDidMount(){
         const { getShipments } = this.props;
         getShipments();
     }
+
+    getColumnSearchProps = dataIndex => ({
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+          <div style={{ padding: 8 }}>
+            <Input
+              ref={node => {
+                this.searchInput = node;
+              }}
+              placeholder={`Search ${dataIndex}`}
+              value={selectedKeys[0]}
+              onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+              onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
+              style={{ width: 188, marginBottom: 8, display: 'block' }}
+            />
+            <Button
+              type="primary"
+              onClick={() => this.handleSearch(selectedKeys, confirm)}
+              icon="search"
+              size="small"
+              style={{ width: 90, marginRight: 8 }}
+            >
+              Search
+            </Button>
+            <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+              Reset
+            </Button>
+          </div>
+        ),
+        filterIcon: filtered => (
+          <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+        ),
+        onFilter: (value, record) =>
+          record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: visible => {
+          if (visible) {
+            setTimeout(() => this.searchInput.select());
+          }
+        },
+        render: text => (
+          <Highlighter
+            highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+            searchWords={[this.state.searchText]}
+            autoEscape
+            textToHighlight={text.toString()}
+          />
+        ),
+      });
+
+      handleSearch = (selectedKeys, confirm) => {
+        confirm();
+        this.setState({ searchText: selectedKeys[0] });
+      };
+    
+      handleReset = clearFilters => {
+        clearFilters();
+        this.setState({ searchText: '' });
+      };
 
     render(){
         const { shipments, history, location, deleteShipment } = this.props;
@@ -24,7 +86,7 @@ class Shipments extends React.Component {
               title: "Shipment ID",
               dataIndex: "shipmentid",
               key: 'shipmentid',
-              sorter: (a, b) => a.shipmentid.localeCompare(b.shipmentid)
+              ...this.getColumnSearchProps('shipmentid'),
             },
             {
               title: "User ID",
@@ -107,7 +169,7 @@ class Shipments extends React.Component {
         return (
             <section className='route_section'>
                 <Col span={20} className='mt-3'>
-                    <Row>
+                    <Row className='mb-3'>
                         <Title level={2}><Text type="secondary">Shipments Table</Text></Title>
                         <Button type='primary'>
                             <Link
@@ -117,9 +179,6 @@ class Shipments extends React.Component {
                             </Link>
                         </Button>
                     </Row>
-                    <Col lg={{ offset: 12, span: 12 }} className='mt-3 mb-3'>
-                        <Search placeholder="search by Shipment ID" enterButton />
-                    </Col>
                     <Table columns={columns} data={data}/>
                 </Col>
             </section>
@@ -130,7 +189,7 @@ class Shipments extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        shipments: state.shipments.shipments
+        shipments: state.shipments.response
     }
 }
 

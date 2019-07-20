@@ -14,7 +14,7 @@ const Shipment = props => {
           foundShipment ? (
               <Row className="project-summary">
                 <Row>
-                <Col span={20}>
+                <Col lg={20} xs={18} sm={18}>
                   <div className="card__title">
                     <h4 className="bold-text">
                       {shipment.response.name}: {shipment.response.id}
@@ -26,7 +26,7 @@ const Shipment = props => {
                     </h4>
                   </div>
                 </Col>
-                <Col span={4}>
+                <Col lg={4} xs={6} sm={6}>
                   <Button type='primary'>
                     <Link
                       to={`/shipments/edit/${shipmentId}`}
@@ -38,52 +38,52 @@ const Shipment = props => {
                 </Col>
                 </Row>
                 <Row>
-                <Col span={8}>
+                <Col lg={8} xs={24} sm={24}>
                   <Row>
-                    <Col span={6} className="bold-text">User ID</Col>
-                    <Col span={18}>
+                    <Col lg={6} xs={12} sm={12} className="bold-text">User ID</Col>
+                    <Col lg={18} xs={12} sm={12}>
                       <p>{shipment.response.userId}</p>
                     </Col>
 
-                    <Col span={6} className="bold-text">Mode</Col>
-                    <Col span={18}>
+                    <Col lg={6} xs={12} sm={12} className="bold-text">Mode</Col>
+                    <Col lg={18} xs={12} sm={12}>
                       <p>{shipment.response.mode}</p>
                     </Col>
 
-                    <Col span={6} className="bold-text">Type</Col>
-                    <Col span={18}>
+                    <Col lg={6} xs={12} sm={12} className="bold-text">Type</Col>
+                    <Col lg={18} xs={12} sm={12}>
                       <p>{shipment.response.type}</p>
                     </Col>
 
-                    <Col span={6} className="bold-text">Status</Col>
-                    <Col span={18}>
+                    <Col lg={6} xs={12} sm={12} className="bold-text">Status</Col>
+                    <Col lg={18} xs={12} sm={12}>
                       <p>{shipment.response.status}</p>
                     </Col>
 
-                    <Col span={6} className="bold-text">Total</Col>
-                    <Col span={18}>
+                    <Col lg={6} xs={12} sm={12} className="bold-text">Total</Col>
+                    <Col lg={18} xs={12} sm={12}>
                       <p>{shipment.response.total}</p>
                     </Col>
                   </Row>
                 </Col>
-                <Col md={16}>
+                <Col lg={16} xs={24} sm={24}>
                   <Row >
-                    <Col span={4} className="bold-text">Cargo</Col>
-                    <Col span={20}>
+                    <Col lg={4} xs={24} sm={24}className="bold-text">Cargo</Col>
+                    <Col lg={20} xs={24} sm={24}>
                       {shipment.response.cargo &&
                       shipment.response.cargo.length ? (
                         shipment.response.cargo.map((cargo, index) => (
                           <Row  key={index}>
-                            <Col span={4} className="bold-text">Type</Col>
-                            <Col span={20}>
+                            <Col lg={4} xs={12} sm={12} className="bold-text">Type</Col>
+                            <Col lg={20} xs={12} sm={12}>
                               <p>{cargo.type}</p>
                             </Col>
-                            <Col span={4} className="bold-text">Description</Col>
-                            <Col span={20}>
+                            <Col lg={4} xs={12} sm={12} className="bold-text">Description</Col>
+                            <Col lg={20} xs={12} sm={12}>
                               <p>{cargo.description}</p>
                             </Col>
-                            <Col span={4} className="bold-text">Volume</Col>
-                            <Col span={20}>
+                            <Col lg={4} xs={12} sm={12} className="bold-text">Volume</Col>
+                            <Col lg={20} xs={12} sm={12}>
                               <p>{cargo.volume}</p>
                             </Col>
                           </Row>
@@ -92,14 +92,14 @@ const Shipment = props => {
                         <p className="text-muted">-- No cargo found --</p>
                       )}
                     </Col>
-                    <Col span={4} className="bold-text">Services</Col>
-                    <Col span={20}>
+                    <Col lg={4} xs={24} sm={24} className="bold-text">Services</Col>
+                    <Col lg={20} xs={24} sm={24}>
                       {shipment.response.services &&
                       shipment.response.services.length ? (
                         shipment.response.services.map((service, index) => (
                           <Row  key={index}>
-                            <Col span={4} className="bold-text">Type</Col>
-                            <Col span={20}>
+                            <Col lg={4} xs={12} sm={12} className="bold-text">Type</Col>
+                            <Col lg={20} xs={12} sm={12}>
                               <p>{service.type}</p>
                             </Col>
                           </Row>
@@ -133,7 +133,7 @@ const Shipment = props => {
                       ? `Something went wrong. Could not fetch shipment with ID: (${shipmentId})`
                       : `Shipment with ID (${shipmentId}) not found`}
                   </h4>
-                  <Button color="primary" outline size="sm" onClick={fetchData}>
+                  <Button color="primary" outline size="small" onClick={fetchData}>
                     Try Again
                   </Button>
                 </div>

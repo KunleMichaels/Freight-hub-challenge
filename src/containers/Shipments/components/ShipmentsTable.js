@@ -13,7 +13,7 @@ class ShipmentsTable extends React.Component {
     render(){
         const { loading, data, columns } = this.props;
         return (
-            <Table columns={columns} dataSource={data} loading={loading} size='small' />
+            <Table columns={columns} dataSource={data} loading={loading} size='small' pagination={ {pageSize: 20 }} />
         );
     }
 }

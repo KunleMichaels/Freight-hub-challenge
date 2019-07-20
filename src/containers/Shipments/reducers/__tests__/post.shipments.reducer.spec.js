@@ -1,5 +1,5 @@
-import { postShipments } from "../post.shipments.reducers";
-import { shipmentActionConstants } from "../../constants/shipments.constants";
+import { postShipments } from "../postShipmentsReducers";
+import types from "../../constants/shipmentsConstants";
 
 const initialState = {
   loading: false,
@@ -14,18 +14,18 @@ describe("POST Shipments reducer", () => {
     expect(postShipments(undefined, {})).toEqual(initialState);
   });
 
-  it("should handle POST_SHIPMENTS_REQUEST", () => {
+  it("should handle POST_SHIPMENT", () => {
     expect(
       postShipments(initialState, {
-        type: shipmentActionConstants.POST_SHIPMENTS_RESET
+        type: types.POST_SHIPMENT_RESET
       })
     ).toEqual(initialState);
   });
 
-  it("should handle POST_SHIPMENTS_REQUEST", () => {
+  it("should handle POST_SHIPMENT", () => {
     expect(
       postShipments(initialState, {
-        type: shipmentActionConstants.POST_SHIPMENTS_REQUEST,
+        type: types.POST_SHIPMENT,
         request: {}
       })
     ).toEqual({
@@ -35,10 +35,10 @@ describe("POST Shipments reducer", () => {
     });
   });
 
-  it("should handle POST_SHIPMENTS_SUCCESS", () => {
+  it("should handle POST_SHIPMENT_SUCCESS", () => {
     expect(
       postShipments(initialState, {
-        type: shipmentActionConstants.POST_SHIPMENTS_SUCCESS,
+        type: types.POST_SHIPMENT_SUCCESS,
         response: { data: [] }
       })
     ).toEqual({
@@ -50,10 +50,10 @@ describe("POST Shipments reducer", () => {
     });
   });
 
-  it("should handle POST_SHIPMENTS_FAILURE", () => {
+  it("should handle POST_SHIPMENT_FAILURE", () => {
     expect(
       postShipments(initialState, {
-        type: shipmentActionConstants.POST_SHIPMENTS_FAILURE,
+        type: types.POST_SHIPMENT_FAILURE,
         error: { data: [] },
         loading: false,
         response: null,

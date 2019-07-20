@@ -8,7 +8,7 @@ import {
   ButtonToolbar,
   Spinner
 } from "reactstrap";
-import { Field, FieldArray, reduxForm } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { MdArrowBack } from "react-icons/md";
@@ -17,8 +17,6 @@ import { renderField } from "./renderfield";
 import validate from "./validate";
 
 import { resetPostShipment } from "../actions/shipmentsActions";
-import renderServiceFields from "./renderServicesFields";
-import renderCargoFields from "./renderCargoFields";
 
 const ShipmentForm = memo(
   ({

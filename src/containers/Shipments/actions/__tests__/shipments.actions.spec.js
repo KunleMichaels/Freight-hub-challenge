@@ -6,13 +6,13 @@ import {
   postShipments,
   resetPostShipment,
   resetViewShipment
-} from "../shipments.actions";
-import { shipmentActionConstants } from "../../constants/shipments.constants";
-import { alertConstants } from "../../../Notifications/constants/alert.constants";
+} from "../shipmentsActions";
+import types from "../../constants/shipmentsConstants";
+import * as alertConstants from "../../../Alert/alertActions";
 
 import fetchMock from "fetch-mock";
 
-import { SHIPMENTS_API } from "../../../../constants/apiUrls";
+import { SHIPMENTS_API } from "../../../../api/endpoints";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -29,9 +29,9 @@ describe("async actions", () => {
     });
 
     const expectedActions = [
-      { type: shipmentActionConstants.GET_SHIPMENTS_REQUEST },
+      { type: types.GET_SHIPMENTS },
       {
-        type: shipmentActionConstants.GET_SHIPMENTS_SUCCESS,
+        type: types.GET_SHIPMENTS_SUCCESS,
         response: { response: [] }
       }
     ];
@@ -44,16 +44,16 @@ describe("async actions", () => {
     });
   });
 
-  it("creates VIEW_SHIPMENT_SUCCESS when a request is sent", () => {
+  it("creates GET_SHIPMENT_SUCCESS when a request is sent", () => {
     fetchMock.getOnce(`${SHIPMENTS_API}/44`, {
       body: { response: {} },
       headers: { "content-type": "application/json" }
     });
 
     const expectedActions = [
-      { type: shipmentActionConstants.VIEW_SHIPMENTS_REQUEST, request: 44 },
+      { type: types.GET_SHIPMENT, request: 44 },
       {
-        type: shipmentActionConstants.VIEW_SHIPMENTS_SUCCESS,
+        type: types.GET_SHIPMENT_SUCCESS,
         response: { response: {} }
       }
     ];
@@ -66,7 +66,7 @@ describe("async actions", () => {
     });
   });
 
-  it("creates POST_SHIPMENTS_SUCCESS when a request is sent", () => {
+  it("creates POST_SHIPMENT_SUCCESS when a request is sent", () => {
     fetchMock.postOnce(SHIPMENTS_API, {
       body: { response: {}, responseMessage: "success" },
       headers: { "content-type": "application/json" }
@@ -76,11 +76,13 @@ describe("async actions", () => {
       headers: { "content-type": "application/json" }
     });
 
+    const store = mockStore({ todos: [] });
+
     const expectedActions = [
-      { request: {}, type: shipmentActionConstants.POST_SHIPMENTS_REQUEST },
+      { request: {}, type: types.POST_SHIPMENT },
       {
         response: { response: {}, responseMessage: "success" },
-        type: shipmentActionConstants.POST_SHIPMENTS_SUCCESS
+        type: types.POST_SHIPMENT_SUCCESS
       },
       {
         meta: {
@@ -90,15 +92,13 @@ describe("async actions", () => {
       },
       {
         alertType: "success",
-        title: "Shipment saved successfully",
-        message: "success",
-        type: alertConstants.SHOW
+        message: "Shipment saved successfully",
+        type: alertConstants.SHOW_ALERT
       },
-      { type: shipmentActionConstants.GET_SHIPMENTS_REQUEST },
-      { type: shipmentActionConstants.POST_SHIPMENTS_RESET },
-      { type: shipmentActionConstants.VIEW_SHIPMENTS_RESET }
+      { type: types.GET_SHIPMENTS },
+      { type: types.POST_SHIPMENT_RESET },
+      { type: types.GET_SHIPMENT_RESET }
     ];
-    const store = mockStore({ todos: [] });
 
     return store.dispatch(postShipments({})).then(() => {
       const actions = store.getActions();
@@ -106,15 +106,15 @@ describe("async actions", () => {
       expect(actions).toEqual(expectedActions);
     });
   });
-  it(`Handle VIEW_SHIPMENTS_RESET`, () => {
+  it(`Handle GET_SHIPMENT_RESET`, () => {
     const expectedAction = {
-      type: shipmentActionConstants.VIEW_SHIPMENTS_RESET
+      type: types.GET_SHIPMENT_RESET
     };
     expect(resetViewShipment()).toEqual(expectedAction);
   });
-  it(`RESET POST_SHIPMENTS_RESET`, () => {
+  it(`RESET POST_SHIPMENT_RESET`, () => {
     const expectedAction = {
-      type: shipmentActionConstants.POST_SHIPMENTS_RESET
+      type: types.POST_SHIPMENT_RESET
     };
     expect(resetPostShipment()).toEqual(expectedAction);
   });

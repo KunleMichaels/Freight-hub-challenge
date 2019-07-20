@@ -13,7 +13,7 @@ export const getShipments = () => {
       dispatch(failure(error));
       dispatch(
         showAlert(
-          "danger",
+          "error",
           "Failed to get shipments",
           dispatch
         )
@@ -51,7 +51,7 @@ export const viewShipment = id => {
       dispatch(failure(error));
       dispatch(
         showAlert(
-          "danger",
+          "error",
           `Failed to get selected shipment: ${id}`,
           dispatch
         )
@@ -86,12 +86,12 @@ export const deleteShipment = id => {
       const response = await shipmentsService.deleteShipment(id);
       response && dispatch(success(response));
       dispatch(getShipments());
-      dispatch(showAlert("success", `Deleted shipment with ID: ${id}`));
+      dispatch(showAlert("success", `Deleted shipment with ID: ${id}`, dispatch));
     } catch (error) {
       dispatch(failure(error));
       dispatch(
         showAlert(
-          "danger",
+          "error",
           `Failed to delete shipment: ${id}`,
           dispatch
         )
@@ -124,7 +124,7 @@ export const postShipments = (values, id) => {
   return async dispatch => {
     dispatch(request(requestBody));
     try {
-      const response = await shipmentsService.postShipments(requestBody, id);
+      const response = await shipmentsService.postShipment(requestBody, id);
       dispatch(success(response));
       dispatch(reset("shipment_form"));
       dispatch(
@@ -145,7 +145,7 @@ export const postShipments = (values, id) => {
       dispatch(failure(error));
       dispatch(
         showAlert(
-          "danger",
+          "error",
           id ? "Failed to update shipment" : "Failed to save shipment",
           dispatch
         )
@@ -171,7 +171,7 @@ export const postShipments = (values, id) => {
 };
 
 export const resetViewShipment = () => {
-  return { type: types.VIEW_SHIPMENT_RESET };
+  return { type: types.GET_SHIPMENT_RESET };
 };
 
 export const resetPostShipment = () => {

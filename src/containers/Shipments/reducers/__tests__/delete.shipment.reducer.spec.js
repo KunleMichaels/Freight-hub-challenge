@@ -1,5 +1,5 @@
-import { deleteShipment } from "../delete.shipment.reducers";
-import { shipmentActionConstants } from "../../constants/shipments.constants";
+import { deleteShipment } from "../deleteShipmentReducers";
+import types from "../../constants/shipmentsConstants";
 
 const initialState = {
   loading: false,
@@ -17,15 +17,15 @@ describe("Delete Shipments reducer", () => {
   it("should handle DELETE_SHIPMENTS_RESET", () => {
     expect(
       deleteShipment(initialState, {
-        type: shipmentActionConstants.DELETE_SHIPMENTS_RESET
+        type: types.DELETE_SHIPMENT_RESET
       })
     ).toEqual(initialState);
   });
 
-  it("should handle DELETE_SHIPMENTS_REQUEST", () => {
+  it("should handle DELETE_SHIPMENT", () => {
     expect(
       deleteShipment(initialState, {
-        type: shipmentActionConstants.DELETE_SHIPMENTS_REQUEST,
+        type: types.DELETE_SHIPMENT,
         request: 44
       })
     ).toEqual({
@@ -35,10 +35,10 @@ describe("Delete Shipments reducer", () => {
     });
   });
 
-  it("should handle DELETE_SHIPMENTS_SUCCESS", () => {
+  it("should handle DELETE_SHIPMENT_SUCCESS", () => {
     expect(
       deleteShipment(initialState, {
-        type: shipmentActionConstants.DELETE_SHIPMENTS_SUCCESS,
+        type: types.DELETE_SHIPMENT_SUCCESS,
         response: { data: [] }
       })
     ).toEqual({
@@ -50,10 +50,10 @@ describe("Delete Shipments reducer", () => {
     });
   });
 
-  it("should handle DELETE_SHIPMENTS_FAILURE", () => {
+  it("should handle DELETE_SHIPMENT_FAILURE", () => {
     expect(
       deleteShipment(initialState, {
-        type: shipmentActionConstants.DELETE_SHIPMENTS_FAILURE,
+        type: types.DELETE_SHIPMENT_FAILURE,
         error: { data: [] },
         loading: false,
         response: null,

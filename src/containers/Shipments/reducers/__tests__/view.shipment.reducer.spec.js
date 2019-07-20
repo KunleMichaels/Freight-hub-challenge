@@ -1,5 +1,5 @@
-import { viewShipment } from "../view.shipment.reducers";
-import { shipmentActionConstants } from "../../constants/shipments.constants";
+import { viewShipment } from "../viewShipmentReducers";
+import types from "../../constants/shipmentsConstants";
 
 const initialState = {
   loading: false,
@@ -14,18 +14,18 @@ describe("View Shipment reducer", () => {
     expect(viewShipment(undefined, {})).toEqual(initialState);
   });
 
-  it("should handle VIEW_SHIPMENTS_RESET", () => {
+  it("should handle GET_SHIPMENT_RESET", () => {
     expect(
       viewShipment(initialState, {
-        type: shipmentActionConstants.VIEW_SHIPMENTS_RESET
+        type: types.GET_SHIPMENT_RESET
       })
     ).toEqual(initialState);
   });
 
-  it("should handle VIEW_SHIPMENTS_REQUEST", () => {
+  it("should handle GET_SHIPMENT", () => {
     expect(
       viewShipment(initialState, {
-        type: shipmentActionConstants.VIEW_SHIPMENTS_REQUEST,
+        type: types.GET_SHIPMENT,
         request: 44
       })
     ).toEqual({
@@ -35,10 +35,10 @@ describe("View Shipment reducer", () => {
     });
   });
 
-  it("should handle VIEW_SHIPMENTS_SUCCESS", () => {
+  it("should handle GET_SHIPMENT_SUCCESS", () => {
     expect(
       viewShipment(initialState, {
-        type: shipmentActionConstants.VIEW_SHIPMENTS_SUCCESS,
+        type: types.GET_SHIPMENT_SUCCESS,
         response: { data: [] }
       })
     ).toEqual({
@@ -50,10 +50,10 @@ describe("View Shipment reducer", () => {
     });
   });
 
-  it("should handle VIEW_SHIPMENTS_FAILURE", () => {
+  it("should handle GET_SHIPMENT_FAILURE", () => {
     expect(
       viewShipment(initialState, {
-        type: shipmentActionConstants.VIEW_SHIPMENTS_FAILURE,
+        type: types.GET_SHIPMENT_FAILURE,
         error: { data: [] },
         loading: false,
         response: null,

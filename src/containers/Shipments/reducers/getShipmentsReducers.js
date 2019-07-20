@@ -4,7 +4,7 @@ const initialState = {
   loading: false,
   success: false,
   request: null,
-  shipments: null,
+  response: null,
   error: null
 };
 
@@ -20,7 +20,7 @@ export const shipments = (state = initialState, action) => {
         ...state,
         loading: false,
         success: true,
-        shipments: action.response,
+        response: action.response,
         error: null
       };
     case types.GET_SHIPMENTS_FAILURE:

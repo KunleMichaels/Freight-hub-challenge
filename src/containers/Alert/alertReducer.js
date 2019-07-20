@@ -15,7 +15,7 @@ export default function alert(state=initialState, action){
                 Object.assign({}, state, {
                     visible: true,
                     message: action.payload.message,
-                    type: action.payload.type
+                    type: action.payload.alertType
                 })
             );
         case HIDE_ALERT:

@@ -17,15 +17,15 @@ const Router = ({ alert }) => (
             <section className='app-body'>
                 <Sidebar />
                 {
-                            alert.visible ? (
-                                <section style={{ minWidth: '300px', margin: '10px', position: 'fixed', top: '50px', right: '10px', zIndex: '99999'}}>
-                                    <Alert
-                                        message={alert.message}
-                                        type={alert.type}
-                                        />
-                                </section>
-                              ) : null
-                        }
+                    alert.visible ? (
+                        <div className='alertStyle'>
+                            <Alert
+                                message={alert.message}
+                                type={alert.type}
+                                />
+                        </div>
+                        ) : null
+                }
                 <main>
                     <div className="main-content">
                         <Route exact path="/" component={Dashboard} />
