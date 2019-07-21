@@ -4,7 +4,7 @@ const initialState = {
   loading: false,
   success: false,
   request: null,
-  response: null,
+  response: [],
   error: null
 };
 

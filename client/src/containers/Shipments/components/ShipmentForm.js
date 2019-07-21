@@ -222,6 +222,7 @@ const ShipmentForm = memo(
                         color="primary"
                         type="submit"
                         disabled={submitting || invalid}
+                        className="ml-3"
                       >
                         {postShipments && postShipments.loading ? (
                           <span>

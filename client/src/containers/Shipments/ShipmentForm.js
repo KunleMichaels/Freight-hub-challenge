@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Col, Container, Row } from "reactstrap";
 import { connect } from "react-redux";
 import { postShipments, viewShipment } from "./actions/shipmentsActions";
-import HorizontalForm from "./components/ShipmentForm";
+import Form from "./components/ShipmentForm";
 
 const ShipmentForm = ({ dispatch, shipment, match }) => {
 
@@ -52,7 +52,7 @@ const ShipmentForm = ({ dispatch, shipment, match }) => {
         </Col>
       </Row>
       <Row>
-        <HorizontalForm
+        <Form
           shipmentId={match.params.id}
           shipment={shipment}
           initialValues={createFormData(shipment)}

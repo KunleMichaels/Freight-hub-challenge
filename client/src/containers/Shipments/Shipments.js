@@ -188,6 +188,7 @@ class Shipments extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log("STATE", state)
     return {
         shipments: state.shipments.response
     }
