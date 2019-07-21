@@ -7,9 +7,13 @@
   "author": "FreightHub Recruiting Team",
   "license": "MIT",
   "scripts": {
-    "start": "json-server db.json"
+    "start": "concurrently \"yarn start:server\" \"yarn start:view\"",
+    "start:server": "json-server db.json PORT 5000",
+    "start:view": "cd view && yarn start"
   },
   "dependencies": {
-    "json-server": "^0.14.2"
+    "concurrently": "^4.1.1",
+    "json-server": "^0.14.2",
+    "redux-form": "^8.2.4"
   }
 }
